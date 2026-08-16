@@ -1,0 +1,26 @@
+/* Bookkeeper design tokens — migrated from the approved Financial-Hub prototype.
+   All tokens are prefixed with --bk- to avoid collisions with shadcn theme vars. */
+:root {
+  --bk-sidebar: #0c1a3a;
+  --bk-sidebar-hover: #162a55;
+  --bk-sidebar-active: #1e3a8a;
+  --bk-page-bg: #f5f7fa;
+  --bk-surface: #ffffff;
+  --bk-surface-subtle: #f9fafb;
+  --bk-text-primary: #101828;
+  --bk-text-secondary: #475569;
+  --bk-text-muted: #94a3b8;
+  --bk-border: #e2e8f0;
+  --bk-border-strong: #cbd5e1;
+  --bk-primary: #4f46e5;
+  --bk-primary-hover: #4338ca;
+  --bk-primary-subtle: #eef2ff;
+  --bk-success: #16a34a;
+  --bk-success-subtle: #f0fdf4;
+  --bk-danger: #dc2626;
+  --bk-danger-subtle: #fef2f2;
+  --bk-warning: #d97706;
+  --bk-warning-subtle: #fffbeb;
+  --bk-violet: #7c3aed;
+  --bk-violet-subtle: #f5f3ff;
+}

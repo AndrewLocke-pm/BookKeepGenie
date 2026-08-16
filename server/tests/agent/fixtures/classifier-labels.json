@@ -1,0 +1,508 @@
+{
+  "_meta": {
+    "description": "Labelled eval dataset for the classifyFromNLP() pipeline (Stage 1 rules + Stage 2 LLM).",
+    "fields": {
+      "id": "Sequential fixture ID",
+      "text": "Transaction description passed to classifyFromNLP()",
+      "vendor": "Optional vendor name passed alongside description",
+      "expected": {
+        "kind": "Hard assertion — must match",
+        "direction": "Soft warning if wrong",
+        "affects_profit": "Soft warning if wrong"
+      },
+      "route": "rules = caught by Stage 1 regex; llm = falls through to Stage 2 LLM",
+      "note": "Why this case is in the dataset"
+    },
+    "total": 60,
+    "breakdown": {
+      "expense": 20,
+      "income": 14,
+      "capital": 8,
+      "owner_loan": 8,
+      "transfer": 5,
+      "tax": 5
+    }
+  },
+  "fixtures": [
+    {
+      "id": 1,
+      "text": "Monthly office rental for October",
+      "vendor": "ABC Properties",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Common recurring expense; no rule keywords"
+    },
+    {
+      "id": 2,
+      "text": "Electricity and water bill for the month",
+      "vendor": "City Power",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Utility expense; no rule keywords"
+    },
+    {
+      "id": 3,
+      "text": "Fuel and oil for company vehicle",
+      "vendor": "BP Garage",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Travel expense; no rule keywords"
+    },
+    {
+      "id": 4,
+      "text": "Printer cartridges and toner from Nashua",
+      "vendor": "Nashua",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Office supplies expense"
+    },
+    {
+      "id": 5,
+      "text": "Business lunch with prospective client",
+      "vendor": "The Test Kitchen",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Meals and entertainment expense"
+    },
+    {
+      "id": 6,
+      "text": "Monthly salary payment to bookkeeper",
+      "vendor": "",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Payroll expense; 'salary payment' must NOT trigger tax pattern (PAYE not mentioned)"
+    },
+    {
+      "id": 7,
+      "text": "Google Ads spend for product launch campaign",
+      "vendor": "Google",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Digital marketing spend"
+    },
+    {
+      "id": 8,
+      "text": "Emergency plumbing repair at the office",
+      "vendor": "Quick Plumb CC",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Maintenance and repairs expense"
+    },
+    {
+      "id": 9,
+      "text": "Adobe Creative Cloud annual subscription",
+      "vendor": "Adobe",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Software subscription expense"
+    },
+    {
+      "id": 10,
+      "text": "Team building event catering and venue",
+      "vendor": "Panarottis Sandton",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Staff entertainment expense"
+    },
+    {
+      "id": 11,
+      "text": "New laptop purchased for remote developer",
+      "vendor": "Incredible Connection",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Equipment expense (not capex in this context)"
+    },
+    {
+      "id": 12,
+      "text": "Legal fees for employment contract review",
+      "vendor": "Smith Attorneys",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Professional services expense"
+    },
+    {
+      "id": 13,
+      "text": "Commercial insurance premium for office contents",
+      "vendor": "Santam",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Insurance expense"
+    },
+    {
+      "id": 14,
+      "text": "Website hosting and domain renewal fees",
+      "vendor": "WP Engine",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "IT infrastructure expense"
+    },
+    {
+      "id": 15,
+      "text": "Discovery Health medical aid company contribution",
+      "vendor": "Discovery Health",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Employee benefits expense"
+    },
+    {
+      "id": 16,
+      "text": "Invoice 101 settled by client Edgars",
+      "vendor": "Edgars",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Standard sales income"
+    },
+    {
+      "id": 17,
+      "text": "Monthly retainer fee received from Deloitte",
+      "vendor": "Deloitte",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Service retainer income"
+    },
+    {
+      "id": 18,
+      "text": "Project completion fee from consulting client",
+      "vendor": "BizConsult SA",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Consulting revenue"
+    },
+    {
+      "id": 19,
+      "text": "Sale of merchandise to wholesale buyer",
+      "vendor": "Massmart",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Product sales income"
+    },
+    {
+      "id": 20,
+      "text": "IT support services rendered to SME client",
+      "vendor": "IT Solutions SA",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Service income"
+    },
+    {
+      "id": 21,
+      "text": "Property commission earned on commercial lease",
+      "vendor": "LeasePro CC",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Commission income"
+    },
+    {
+      "id": 22,
+      "text": "Freelance graphic design project payment received",
+      "vendor": "Client Direct",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Freelance service income"
+    },
+    {
+      "id": 23,
+      "text": "Interest credited on business call account",
+      "vendor": "Nedbank",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Interest income"
+    },
+    {
+      "id": 24,
+      "text": "Rental income from office subletting to tenant",
+      "vendor": "T. Mokoena",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Rental income"
+    },
+    {
+      "id": 25,
+      "text": "SEDA enterprise development grant received",
+      "vendor": "SEDA",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "Government grant income; SEDA alone does not trigger tax pattern"
+    },
+    {
+      "id": 26,
+      "text": "Owner deposited R50000 to start business operations",
+      "vendor": "John Smith",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'deposited' is not in ownerFunds regex; LLM must infer equity from context"
+    },
+    {
+      "id": 27,
+      "text": "Founder put personal savings into business account",
+      "vendor": "Jane Dlamini",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'put in' matches ownerFunds rule"
+    },
+    {
+      "id": 28,
+      "text": "Initial business funding from the company director",
+      "vendor": "Director A",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'funded' matches ownerFunds rule"
+    },
+    {
+      "id": 29,
+      "text": "Equity raised from managing director for expansion",
+      "vendor": "Managing Director",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'equity raised' does not match 'equity injection'; LLM must classify"
+    },
+    {
+      "id": 30,
+      "text": "R200000 from owner placed into operating account",
+      "vendor": "Owner",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'placed into' is not in ownerFunds regex; LLM must infer"
+    },
+    {
+      "id": 31,
+      "text": "Owner injected R80000 cash for startup costs",
+      "vendor": "Owner",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'injected' alone is not in ownerFunds regex (only 'equity injection' and 'capital injection' are)"
+    },
+    {
+      "id": 32,
+      "text": "Owner infused cash from personal account into business",
+      "vendor": "Owner",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'infused' is not in any regex; LLM must classify from context"
+    },
+    {
+      "id": 33,
+      "text": "Seed money received from founding partner",
+      "vendor": "Founding Partner",
+      "expected": { "kind": "capital", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "Seed funding phrasing; no rule keyword present"
+    },
+    {
+      "id": 34,
+      "text": "MD loaned R30000 to cover payroll shortfall",
+      "vendor": "MD",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'MD' does not match 'director'; 'loaned' does not match \\bloan\\b; LLM must infer"
+    },
+    {
+      "id": 35,
+      "text": "CEO provided advance to business for cash flow",
+      "vendor": "CEO",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "CEO is not 'director' or 'shareholder'; advance is repayable"
+    },
+    {
+      "id": 36,
+      "text": "Managing member bridge loan to the company",
+      "vendor": "Managing Member",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'loan to the company' matches \\bloan\\b.*(to|into).*(business|company)"
+    },
+    {
+      "id": 37,
+      "text": "Owner lent money for stock purchase to be repaid",
+      "vendor": "Owner",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'lent money' without director/shareholder context; \\bloan\\b not present"
+    },
+    {
+      "id": 38,
+      "text": "Director's personal funds lent to the business for 3 months",
+      "vendor": "Director",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'director' + 'lent' matches (director|shareholder).*(lent|loaned|advanced)"
+    },
+    {
+      "id": 39,
+      "text": "Shareholder advance for operating cash flow requirements",
+      "vendor": "Shareholder",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'shareholder advance' — 'advance' not in (lent|loaned|advanced); no 'loan' keyword; LLM must infer repayable nature"
+    },
+    {
+      "id": 40,
+      "text": "Repayable amount advanced by business owner to company",
+      "vendor": "Owner",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'repayable' signals a loan; no rule keyword matches this phrasing"
+    },
+    {
+      "id": 41,
+      "text": "R50000 from founding director to be repaid over 12 months",
+      "vendor": "Founding Director",
+      "expected": { "kind": "owner_loan", "direction": "inflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'director' present but no loan/lent/loaned/advanced keyword; LLM must identify repayable intent"
+    },
+    {
+      "id": 42,
+      "text": "Funds swept to fixed deposit account end of month",
+      "vendor": "FNB",
+      "expected": { "kind": "transfer", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "Account sweep — no 'transfer' keyword; LLM must identify internal movement"
+    },
+    {
+      "id": 43,
+      "text": "Monthly reallocation between operating accounts",
+      "vendor": "",
+      "expected": { "kind": "transfer", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'between accounts' without 'transfer' word; LLM must classify as internal movement"
+    },
+    {
+      "id": 44,
+      "text": "Cash moved from current account to savings account",
+      "vendor": "Absa",
+      "expected": { "kind": "transfer", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'cash moved from' — does not match \\bmove(d)? funds\\b; 'moved' is followed by 'from' not 'funds'"
+    },
+    {
+      "id": 45,
+      "text": "Internal account transfer to reserve fund",
+      "vendor": "Standard Bank",
+      "expected": { "kind": "transfer", "direction": "outflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'transfer' keyword matches rule directly"
+    },
+    {
+      "id": 46,
+      "text": "Year-end surplus sweep to investment vehicle",
+      "vendor": "",
+      "expected": { "kind": "transfer", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'surplus sweep' is a common SA phrasing for internal moves; no rule keywords"
+    },
+    {
+      "id": 47,
+      "text": "First provisional tax installment to SARS",
+      "vendor": "SARS",
+      "expected": { "kind": "tax", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'installment' is not in (payment|paid|settlement|remittance); LLM must classify"
+    },
+    {
+      "id": 48,
+      "text": "PAYE for October payroll run submitted",
+      "vendor": "SARS",
+      "expected": { "kind": "tax", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "'submitted' is not in (payment|paid|settlement|remittance); LLM must handle"
+    },
+    {
+      "id": 49,
+      "text": "UIF contribution to the Department of Labour",
+      "vendor": "Department of Labour",
+      "expected": { "kind": "tax", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "UIF is a mandatory statutory contribution; not in regex pattern; LLM must classify"
+    },
+    {
+      "id": 50,
+      "text": "Income tax paid to SARS for the year",
+      "vendor": "SARS",
+      "expected": { "kind": "tax", "direction": "outflow", "affects_profit": false },
+      "route": "rules",
+      "note": "'income tax' + 'paid' matches taxPayment rule exactly"
+    },
+    {
+      "id": 51,
+      "text": "SDL skills development levy charge",
+      "vendor": "SARS",
+      "expected": { "kind": "tax", "direction": "outflow", "affects_profit": false },
+      "route": "llm",
+      "note": "SDL is a statutory levy; 'skills development levy' not in regex; LLM must classify"
+    },
+    {
+      "id": 52,
+      "text": "Invested in a new digital marketing campaign",
+      "vendor": "Media Agency",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: 'invested in' matches notOwnerFunds negative pattern → null → LLM. Must return expense, not capital"
+    },
+    {
+      "id": 53,
+      "text": "Capital expenditure for new office furniture",
+      "vendor": "Furniture City",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: 'capital expenditure' matches notOwnerFunds → null → LLM. Must return expense, not capital"
+    },
+    {
+      "id": 54,
+      "text": "Bank loan repayment to FNB",
+      "vendor": "FNB",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Business bank loan repayment (not owner loan); 'loan to FNB' does not match \\bloan\\b.*(to|into).*(business|company)"
+    },
+    {
+      "id": 55,
+      "text": "Refund from supplier for cancelled order",
+      "vendor": "Takealot",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Supplier refund reverses an expense — recorded as income per SPEC.md refund rule"
+    },
+    {
+      "id": 56,
+      "text": "Bad debt recovery from former client",
+      "vendor": "Ex-Client Co",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Recovery of previously written-off debt is income"
+    },
+    {
+      "id": 57,
+      "text": "TERS Covid relief payment received from government",
+      "vendor": "UIF TERS",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Relief grant — 'TERS' not in tax regex; 'payment received' is ambiguous; LLM must classify as income"
+    },
+    {
+      "id": 58,
+      "text": "Dividend income received from subsidiary company",
+      "vendor": "Subsidiary Pty Ltd",
+      "expected": { "kind": "income", "direction": "inflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Investment income from subsidiary; not a capital transaction"
+    },
+    {
+      "id": 59,
+      "text": "Depreciation charge on company delivery vehicles",
+      "vendor": "",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: Non-cash expense still affects P&L; LLM must recognise depreciation as an expense"
+    },
+    {
+      "id": 60,
+      "text": "BEE compliance audit and certification fee",
+      "vendor": "BEE Ratings SA",
+      "expected": { "kind": "expense", "direction": "outflow", "affects_profit": true },
+      "route": "llm",
+      "note": "EDGE CASE: South African-specific regulatory cost; no generic keywords to guide rules"
+    }
+  ]
+}

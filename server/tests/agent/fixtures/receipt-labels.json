@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "description": "Golden-set labels for the receipt extraction eval. Each entry maps a synthetic receipt PNG to its ground-truth fields.",
+    "matching_rules": {
+      "vendor": "Case-insensitive substring — AI may abbreviate or vary punctuation",
+      "amount": "Exact numeric equality after parseFloat, tolerance ±0.01",
+      "date": "ISO 8601 YYYY-MM-DD, tolerance ±1 calendar day",
+      "category": "Exact match against the seven allowed categories (soft warning, not counted in threshold)"
+    },
+    "hard_fields": ["vendor", "amount", "date"],
+    "soft_fields": ["category"],
+    "threshold": 0.80
+  },
+  "receipts": [
+    {
+      "filename": "receipt_woolworths_food.png",
+      "expected": {
+        "vendor": "Woolworths",
+        "amount": "245.50",
+        "date": "2025-03-15",
+        "category": "Meals & Entertainment"
+      },
+      "note": "Grocery/food purchase. Vendor name rendered as 'Woolworths Food' on the image — partial match on 'Woolworths' is acceptable."
+    },
+    {
+      "filename": "receipt_incredible_connection.png",
+      "expected": {
+        "vendor": "Incredible Connection",
+        "amount": "1299.00",
+        "date": "2025-04-02",
+        "category": "Office Supplies"
+      },
+      "note": "Computer peripherals purchase. Full vendor name on image — AI should match exactly."
+    },
+    {
+      "filename": "receipt_shell_garage.png",
+      "expected": {
+        "vendor": "Shell",
+        "amount": "850.00",
+        "date": "2025-03-28",
+        "category": "Travel"
+      },
+      "note": "Fuel receipt. Vendor rendered as 'Shell Garage' — partial match on 'Shell' is acceptable."
+    },
+    {
+      "filename": "receipt_vodacom.png",
+      "expected": {
+        "vendor": "Vodacom",
+        "amount": "399.00",
+        "date": "2025-02-28",
+        "category": "Utilities"
+      },
+      "note": "Telecoms/data bill. Amount is clean integer — easy for AI to extract."
+    },
+    {
+      "filename": "receipt_smith_associates.png",
+      "expected": {
+        "vendor": "Smith",
+        "amount": "4500.00",
+        "date": "2025-04-10",
+        "category": "Professional Services"
+      },
+      "note": "Legal fees invoice. Vendor rendered as 'Smith & Associates' — partial match on 'Smith' is acceptable."
+    }
+  ]
+}
